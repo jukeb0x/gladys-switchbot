@@ -14,7 +14,7 @@
     vm.createDevice = createDevice;
     vm.updateDevice = updateDevice;
     vm.selectDevice = selectDevice;
-    vm.createMeshDevice = createMeshDevice;
+    //vm.createMeshDevice = createMeshDevice;
     vm.testDevice = testDevice;
 
     vm.scanning = false;
@@ -36,7 +36,7 @@
         $scope.$apply(function () {
           vm.devices = params;
           if (params.length === 0) {
-            $translate('SCAN_NO_FOUND').then(function(msg{
+            $translate('SCAN_NO_FOUND').then(function(msg){
               manageError(msg);
             });
           } else {
