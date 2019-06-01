@@ -1,0 +1,195 @@
+<script src="/hooks/switchbot/js/switchbot.lang.js"></script>
+<script src="/hooks/switchbot/js/switchbot.controller.js"></script>
+<script src="/hooks/switchbot/js/switchbot.service.js"></script>
+
+<div data-ng-controller="SwitchbotController as vm">
+    <div class="box skin-box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">{{ 'INFO_TITLE' | translate}}</h3>
+        </div>
+        <div class="box-body table-responsive">
+            <p>{{ 'INFO_CONTENT' | translate}}</p>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <!--<div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingRemote">
+                        <p class="panel-title" style="font-size: inherit">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRemote" aria-expanded="false" aria-controls="collapseRemote">
+                                {{ 'INFO_REMOTE_TITLE' | translate}}
+                            </a>
+                        </p>
+                    </div>
+                    <div id="collapseRemote" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRemote">
+                        <div class="panel-body">
+                            {{ 'INFO_REMOTE' | translate}}
+                            <ol class="steps">
+                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_1' | translate}}</li>
+                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_2' | translate}}</li>
+                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_3' | translate}}</li>
+                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_4' | translate}}</li>
+                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_5' | translate}}</li>
+                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_6' | translate}}</li>
+                            </ol>
+                        </div>
+                    </div>-
+                </div>-->
+                <!--<div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingPairing">
+                        <p class="panel-title" style="font-size: inherit">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsePairing" aria-expanded="false" aria-controls="collapsePairing">
+                                {{ 'MESH_PAIR_TITLE' | translate}}
+                            </a>
+                        </p>
+                    </div>
+                    <div id="collapsePairing" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPairing">
+                        <div class="panel-body">
+                            <p>{{ 'MESH_PAIR_DESCR' | translate}}</p>
+                            <p><a href="https://youtu.be/8ONHVmmGEBY" target="_blank">{{ 'AWOX_RESET_OFFICIAL_VIDEO' | translate }}</a></p>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="box skin-box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ 'SCAN_TITLE' | translate}}</h3>
+        </div>
+        <div class="box-body table-responsive">
+            <div class="alert alert-danger" role="alert" ng-hide="!vm.error">
+                {{ vm.error }}
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger btn-flat" ng-hide="vm.available"
+                    ng-disabled="vm.progress">{{ 'SCAN_UNAVAILABLE' | translate }}</button>
+                <button type="button" class="btn btn-success btn-flat" ng-click="vm.scan()"
+                    ng-hide="!vm.available || vm.install"
+                    ng-disabled="vm.progress">{{ 'SCAN_START' | translate }}</button>
+                <button type="button" class="btn btn-secondary btn-flat" ng-hide="!vm.available || !vm.install"
+                    disabled>{{ 'SCAN_RUNNING' | translate }}</button>
+            </div>
+            <div class="box-body table-responsive" ng-hide="vm.devices.length === 0">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th><%= __('Name') %></th>
+                            <th><%= __('Identifier') %></th>
+                            <th><%= __('Protocol') %></th>
+                            <th><%= __('Action') %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="deviceGroup in vm.devices" class="ng-cloak">
+                            <td>{{ deviceGroup.device.name }}</td>
+                            <td>{{ deviceGroup.device.identifier }} </td>
+                            <td>{{ deviceGroup.device.protocol }} </td>
+                            <td>
+                                <button class="btn btn-flat btn-info" data-toggle="modal" data-target=".mesh-modal"
+                                    ng-hide="deviceGroup.alreadyExists"
+                                    ng-click="vm.selectDevice(deviceGroup)"
+                                    ng-disabled="vm.progress">{{ 'DEVICE_CONFIG' | translate }}</button>
+                                <button class="btn btn-flat btn-secondary" ng-hide="!deviceGroup.alreadyExists"
+                                    disabled>{{ 'DEVICE_EXISTS' | translate }}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="modalMesh" class="modal fade mesh-modal" tabindex="-1" role="dialog"
+                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="myLargeModalLabel">{{ vm.selectedDevice.device.name }} -
+                                {{ vm.selectedDevice.device.identifier }}</h4>
+                        </div>
+
+                        <div class="alert alert-danger" role="alert" ng-hide="!vm.mError">
+                            {{ vm.mError }}
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="deviceName" class="col-sm-3 control-label"><%= __('Name') %></label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="<%= __('device-create-name') %>"
+                                        class="form-control" ng-model="vm.selectedDevice.device.name"
+                                        ng-model-options='{ debounce: 500 }' id="deviceName" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="deviceName" class="col-sm-3 control-label"><%= __('Room') %></label>
+                                <div class="col-sm-9">
+                                    <select name="selectRoom" id="selectRoom" class="form-control" ng-model="vm.selectedDevice.device.room">
+                                        <option ng-repeat="room in vm.rooms" ng-value="room.id">{{ room.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" ng-hide="vm.selectedDevice.device.protocol == 'bluetooth-remote'">
+                                <label class="col-sm-3 control-label"><%= __('Action') %></label>
+                                <div class="col-sm-9">
+                                    <div class="form-check" ng-repeat="deviceType in vm.selectedDevice.types">
+                                        <input type="checkbox" class="form-check-input" id="{{ deviceType.identifier }}"
+                                            ng-checked="deviceType.display">
+                                        <label class="form-check-label"
+                                            for="{{ deviceType.identifier }}">{{ deviceType.identifier | translate }}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" ng-hide="vm.selectedDevice.device.protocol != 'bluetooth-mesh'">
+                                <label for="selectRemote" class="col-sm-3 control-label"><%= __('Remote') %></label>
+                                <div class="col-sm-9">
+                                    <select name="selectRemote" id="selectRemote" class="form-control" ng-model="vm.selectedDevice.remoteId"
+                                        ng-options="remote.identifier as (remote.name + ' - ' + remote.identifier) for remote in vm.remotes track by remote.identifier">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" ng-hide="vm.selectedDevice.device.protocol == 'bluetooth' || vm.selectedDevice.remoteId">
+                                <label for="user" class="col-sm-3 control-label"><%= __('User') %></label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="<%= __('User') %>" class="form-control"
+                                        ng-model="vm.selectedDevice.auth.name" id="user" maxlength="16" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row" ng-hide="vm.selectedDevice.device.protocol == 'bluetooth' || vm.selectedDevice.remoteId">
+                                <label for="password" class="col-sm-3 control-label"><%= __('Password') %></label>
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="<%= __('Password') %>" class="form-control"
+                                        ng-model="vm.selectedDevice.auth.pass" id="password" maxlength="16" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-4 col-sm-offset-8">
+                                    <button class="btn btn-flat btn-success"
+                                        ng-hide="vm.selectedDevice.alreadyExists || vm.selectedDevice.device.protocol != 'bluetooth'"
+                                        ng-click="vm.createDevice(vm.selectedDevice);"
+                                        ng-disabled="vm.progress"><%= __('Create') %></button>
+                                    <button class="btn btn-flat btn-info"
+                                        ng-hide="!vm.selectedDevice.alreadyExists"
+                                        ng-click="vm.testDevice(vm.selectedDevice);"
+                                        ng-disabled="vm.progress">{{ 'SWITCH_ON_OFF' | translate }}</button>
+                                    <button class="btn btn-flat btn-success"
+                                        ng-hide="!vm.selectedDevice.alreadyExists"
+                                        ng-click="vm.updateDevice(vm.selectedDevice);"
+                                        ng-disabled="vm.progress"><%= __('Done') %></button>
+                                    <button class="btn btn-flat btn-info"
+                                        ng-hide="vm.selectedDevice.alreadyExists || vm.selectedDevice.device.protocol == 'bluetooth'"
+                                        ng-click="vm.createMeshDevice(vm.selectedDevice)"
+                                        ng-disabled="vm.progress"><%= __('Next') %></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+{
+  "name": "gladys-switchbot",
+  "version": "1.0.0",
+  "description": "Switchbot device manager for Gladys",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u exports --reporter spec --recursive"
+  },
+  "keywords": [
+    "gladys",
+    "switchbot",
+    "bluetooth"
+  ],
+  "author": "Mathilde Le Roch",
+  "license": "CC-BY-NC-SA-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jukeb0x/gladys-switchbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jukeb0x/gladys-switchbot/issues"
+  },
+  "homepage": "https://github.com/jukeb0x/gladys-switchbot#readme",
+  "dependencies": {
+    "aes-js": "^3.1.2",
+    "bluebird": "^3.5.3",
+    "noble": "^1.9.1"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "chai": "^4.1.2",
+    "proxyquire": "^2.0.1",
+    "sinon": "^6.1.5",
+    "istanbul": "^0.4.5"
+  }
+}
