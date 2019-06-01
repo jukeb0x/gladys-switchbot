@@ -32,7 +32,7 @@ module.exports = {
   },
   setup: function (req, res, next) {
     res.json(utils.generateStatus(status));
-  },
+  }/*,
   createMeshDevice: function (req, res, next) {
     const data = req.body;
     const remoteInformation = {
