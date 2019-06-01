@@ -3,7 +3,7 @@
 
   angular
     .module('gladys')
-    .factory('switchbot Service', SwitchbotService);
+    .factory('switchbotService', SwitchbotService);
 
   SwitchbotService.$inject = ['$http'];
 
