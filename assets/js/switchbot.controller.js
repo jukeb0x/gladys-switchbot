@@ -36,7 +36,7 @@
         $scope.$apply(function () {
           vm.devices = params;
           if (params.length === 0) {
-            $translate('SCAN_NO_FOUND').then((msg) => {
+            $translate('SCAN_NO_FOUND').then(function(msg{
               manageError(msg);
             });
           } else {
@@ -98,7 +98,7 @@
       if (result.status != 200) {
         vm.devices = [];
         vm.available = false;
-        $translate('SERVICE_FAIL').then((msg) => {
+        $translate('SERVICE_FAIL').then(function(msg) {
           manageError(msg);
         });
       } else {
@@ -120,11 +120,11 @@
     function createDevice(deviceGroup) {
       vm.progess = true;
       updateTypesName(deviceGroup);
-      deviceService.create(deviceGroup.device, deviceGroup.types).then(() => {
+      deviceService.create(deviceGroup.device, deviceGroup.types).then(function(){
         vm.progess = false;
         deviceGroup.alreadyExists = true;
         $('#modalMesh').modal('hide');
-      }).catch((e) => {
+      }).catch(function(e){
         manageError(e);
         vm.progess = false;
       });
@@ -133,10 +133,10 @@
     function updateDevice(deviceGroup) {
       vm.progess = true;
       updateTypesName(deviceGroup);
-      deviceService.updateDevice(deviceGroup.device, deviceGroup.types).then(() => {
+      deviceService.updateDevice(deviceGroup.device, deviceGroup.types).then(function(){
         vm.progess = false;
         $('#modalMesh').modal('hide');
-      }).catch((e) => {
+      }).catch(function(e){
         manageError(e);
         vm.progess = false;
       });
@@ -156,18 +156,18 @@
     }
 
     function updateTypesName(deviceGroup) {
-      deviceGroup.types.forEach(element => {
+      deviceGroup.types.forEach(function(element){
         element.name = deviceGroup.device.name + element.nameSuffix;
       });
     }
 
     function testDevice(deviceGroup) {
       vm.progess = true;
-      var switchType = deviceGroup.types.filter((type) => {
+      var switchType = deviceGroup.types.filter(function(type){
         return type.identifier == 'switch';
       });
 
-      switchType.forEach(element => {
+      switchType.forEach(function(element){
         return deviceService.exec(element, (!element.lastValue ? 1 : (element.lastValue + 1) % 2))
           .then(function(data){
             element.lastValue = data.data.value; 
