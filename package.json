@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/jukeb0x/gladys-switchbot#readme",
   "dependencies": {
-    "aes-js": "^3.1.2",
     "bluebird": "^3.5.3",
     "noble": "^1.9.1"
   },
