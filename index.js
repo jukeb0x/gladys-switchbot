@@ -30,15 +30,13 @@ module.exports = function (sails) {
     routes: {
       before: {
         'post /switchbot/scan': (req, res, next) => sails.hooks.policies.middleware.checktoken(req, res, next),
-        'get /switchbot/setup': (req, res, next) => sails.hooks.policies.middleware.checktoken(req, res, next)/*,
-        'post /switchbot/create': (req, res, next) => sails.hooks.policies.middleware.checktoken(req, res, next),
-        'get /switchbot/remotes': (req, res, next) => sails.hooks.policies.middleware.checktoken(req, res, next)*/
+        'get /switchbot/setup': (req, res, next) => sails.hooks.policies.middleware.checktoken(req, res, next)
+
       },
       after: {
         'post /switchbot/scan': SwitchbotController.scan,
-        'get /switchbot/setup': SwitchbotController.setup/*,
-        'post /switchbot/create': SwitchbotController.createMeshDevice,
-        'get /switchbot/remotes': SwitchbotController.getRemotes*/
+        'get /switchbot/setup': SwitchbotController.setup
+
       }
     }
   };

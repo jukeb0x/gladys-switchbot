@@ -14,7 +14,6 @@
     vm.createDevice = createDevice;
     vm.updateDevice = updateDevice;
     vm.selectDevice = selectDevice;
-    //vm.createMeshDevice = createMeshDevice;
     vm.testDevice = testDevice;
 
     vm.scanning = false;
@@ -53,19 +52,6 @@
         });
       });
 
-      /*io.socket.on('switchbotPair', function (data) {
-        $scope.$apply(function () {
-          vm.error = null;
-          vm.mError = null;
-          vm.progess = false;
-          vm.selectedDevice.device = data.device;
-          vm.selectedDevice.types = data.type;
-          vm.selectedDevice.alreadyExists = true;
-
-          loadRemotes();
-        });
-      });*/
-
       io.socket.on('switchbotError', function (params) {
         $scope.$apply(function () {
           manageError(params);
@@ -82,17 +68,8 @@
           vm.rooms = data.data;
           vm.rooms.unshift({ id: null, name: '----' });
         });
-
-     // loadRemotes();
     }
 
-    /*function loadRemotes() {
-      switchbotService.getRemotes()
-        .then(function (data) {
-          vm.remotes = data.data;
-          vm.remotes.unshift({ id: null, identifier: '', name: '' });
-        });
-    }*/
 
     function manageResult(result) {
       if (result.status != 200) {
@@ -142,14 +119,6 @@
       });
     }
 
-    /*function createMeshDevice(device) {
-      vm.progess = true;
-      updateTypesName(device);
-      awoxService.createDevice(device).catch((e) => {
-        manageError(e);
-        vm.progess = false;
-      });
-    }*/
 
     function selectDevice(device) {
       vm.selectedDevice = device;

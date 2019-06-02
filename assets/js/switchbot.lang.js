@@ -36,7 +36,7 @@ var translationsEN = {
 var translationsFR = {
   SERVICE_FAIL: 'Le service Switchbot n\'est pas disponible, vérifiez son installation',
   INFO_TITLE: 'Informations',
-  INFO_CONTENT: 'Démarrez l\'analyse afin de rechercher les périphériques AwoX disponibles, et de les configurer afin de les manipuler avec Gladys.',
+  INFO_CONTENT: 'Démarrez l\'analyse afin de rechercher les périphériques Switchbot disponibles, et de les configurer afin de les manipuler avec Gladys.',
   INFO_REMOTE_TITLE: 'Utilisation d\'une télécommande',
   INFO_REMOTE: 'Si vous souhaitez ajouter la gestion d\'ampoules Switchbot dans Gladys, tout en conservant le contrôle avec la télécommande, il vous faut suivre les instructions suivantes :',
   INFO_REMOTE_1: 'remise à zéro de l\'ampoule depuis la télécommande (appui long sur les boutons PowerON + Fav. 1)',

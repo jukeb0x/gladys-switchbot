@@ -9,45 +9,6 @@
         </div>
         <div class="box-body table-responsive">
             <p>{{ 'INFO_CONTENT' | translate}}</p>
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <!--<div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingRemote">
-                        <p class="panel-title" style="font-size: inherit">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRemote" aria-expanded="false" aria-controls="collapseRemote">
-                                {{ 'INFO_REMOTE_TITLE' | translate}}
-                            </a>
-                        </p>
-                    </div>
-                    <div id="collapseRemote" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRemote">
-                        <div class="panel-body">
-                            {{ 'INFO_REMOTE' | translate}}
-                            <ol class="steps">
-                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_1' | translate}}</li>
-                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_2' | translate}}</li>
-                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_3' | translate}}</li>
-                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_4' | translate}}</li>
-                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_5' | translate}}</li>
-                                <li style="list-style-type: decimal;">{{ 'INFO_REMOTE_6' | translate}}</li>
-                            </ol>
-                        </div>
-                    </div>-
-                </div>-->
-                <!--<div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingPairing">
-                        <p class="panel-title" style="font-size: inherit">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsePairing" aria-expanded="false" aria-controls="collapsePairing">
-                                {{ 'MESH_PAIR_TITLE' | translate}}
-                            </a>
-                        </p>
-                    </div>
-                    <div id="collapsePairing" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPairing">
-                        <div class="panel-body">
-                            <p>{{ 'MESH_PAIR_DESCR' | translate}}</p>
-                            <p><a href="https://youtu.be/8ONHVmmGEBY" target="_blank">{{ 'AWOX_RESET_OFFICIAL_VIDEO' | translate }}</a></p>
-                        </div>
-                    </div>
-                </div>-->
-            </div>
         </div>
     </div>
     <div class="box skin-box box-primary">
@@ -129,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row" ng-hide="vm.selectedDevice.device.protocol == 'bluetooth-remote'">
+                            <!--<div class="form-group row" ng-hide="vm.selectedDevice.device.protocol == 'bluetooth-remote'">
                                 <label class="col-sm-3 control-label"><%= __('Action') %></label>
                                 <div class="col-sm-9">
                                     <div class="form-check" ng-repeat="deviceType in vm.selectedDevice.types">
@@ -186,6 +147,7 @@
                                         ng-disabled="vm.progress"><%= __('Next') %></button>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>

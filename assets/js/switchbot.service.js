@@ -12,8 +12,7 @@
     var service = {
       scan: scan,
       setup: setup,
-      createDevice: createDevice/*,
-      getRemotes: getRemotes*/
+      createDevice: createDevice
     };
 
     return service;
@@ -30,8 +29,5 @@
       return $http({ method: 'POST', url: '/switchbot/create', data: device });
     }
 
-    /*function getRemotes() {
-      return $http({ method: 'GET', url: '/switchbot/remotes' });
-    }*/
   }
 })();
